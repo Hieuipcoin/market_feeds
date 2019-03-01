@@ -12,7 +12,9 @@ defmodule MarketFeeds do
       :world
 
   """
-  def hello do
-    :world
+  use Application
+
+  def start(_type, _args) do
+    Ladder.System.start_link
   end
 end
