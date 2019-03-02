@@ -1,15 +1,13 @@
 defmodule Ladder.Services.Binanace.Worker do
   use WebSockex
 
-  alias Ladder.Helper.ProcessRegistry
-
-  def start_link([{endpoint, stream_name}]) do
+  def start_link({endpoint, stream_name}) do
     IO.puts("riki debug here : Ladder.BinanceBtcUsdt.start_link")
-    WebSockex.start_link(endpoint<>stream_name, __MODULE__, %{}, name: via_tuple(stream_name))
+    WebSockex.start_link(endpoint<>stream_name, __MODULE__, %{}, name: process_name(stream_name))
   end
 
-  defp via_tuple(stream_name) do
-    ProcessRegistry.via_tuple({__MODULE__, stream_name})
+  defp process_name(stream_name) do
+    String.to_atom("#{__MODULE__}#{stream_name}")
   end
 
   def handle_frame({:text, msg}, state) do
