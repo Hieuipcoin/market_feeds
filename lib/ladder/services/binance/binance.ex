@@ -9,8 +9,8 @@ defmodule Ladder.Services.Binanace.Binance do
   end
 
   def init(:ok) do
+    IO.puts("riki in init Binance supervisor")
     children = Enum.map(@streams, &worker_spec/1)
-    |> IO.inspect
     Supervisor.init(children, strategy: :one_for_one)
   end
 
@@ -18,4 +18,14 @@ defmodule Ladder.Services.Binanace.Binance do
     default_worker_spec = {Ladder.Services.Binanace.Worker, {@endpoint, stream}}
     Supervisor.child_spec(default_worker_spec, id: stream)
   end
+
+#  def handle_info({:EXIT, pid, reason}, state) do
+#    IO.puts("A child process died: #{reason}")
+#    {:noreply, state}
+#  end
+#
+#  def handle_info(msg, state) do
+#    IO.puts("Supervisor received unexpected message: #{inspect(msg)}")
+#    {:noreply, state}
+#  end
 end

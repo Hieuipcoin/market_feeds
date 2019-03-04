@@ -1,4 +1,4 @@
-defmodule LadderSeries do
+defmodule Ladder.Database.LadderSeries do
   use Instream.Series
 
   series do
