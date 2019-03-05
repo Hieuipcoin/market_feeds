@@ -1,8 +1,11 @@
 defmodule Ladder.Services.Binanace.Binance do
   use Supervisor
+  alias Ladder.Services.Binanace.ConnectionWorker
+  alias Ladder.Services.Binanace.ParserWorker
 
-  @endpoint "wss://stream.binance.com:9443"
-  @streams ["/ws/btcusdt@trade", "/ws/ltcbtc@trade"]
+  [endpoint: endpoint, streams: streams] = Application.get_env(:market_feeds, __MODULE__)
+  @endpoint endpoint
+  @streams streams
 
   def start_link(_) do
     Supervisor.start_link(__MODULE__, :ok, name: __MODULE__)
@@ -18,12 +21,12 @@ defmodule Ladder.Services.Binanace.Binance do
   end
 
   defp con_worker_spec(stream) do
-    default_worker_spec = {Ladder.Services.Binanace.ConnectionWorker, {@endpoint, stream}}
+    default_worker_spec = {ConnectionWorker, {@endpoint, stream}}
     Supervisor.child_spec(default_worker_spec, id: stream<>"con")
   end
 
   defp par_worker_spec(stream) do
-    default_worker_spec = {Ladder.Services.Binanace.ParserWorker, {@endpoint, stream}}
+    default_worker_spec = {ParserWorker, {@endpoint, stream}}
     Supervisor.child_spec(default_worker_spec, id: stream<>"par")
   end
 
