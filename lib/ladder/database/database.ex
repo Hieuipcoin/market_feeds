@@ -12,7 +12,7 @@ defmodule Ladder.Database.Database do
   defp create(value, state) do
     IO.inspect(state)
     data = %LadderSeries{}
-    data = %{data | tags: %{data.tags | exchange: state.binance_info[:exchange], symbol: state.binance_info[:symbol]}}
+    data = %{data | tags: %{data.tags | exchange: state.exchange, symbol: state.symbol}}
     %{data | fields: %{data.fields | value: value}}
   end
 end

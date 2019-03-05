@@ -2,26 +2,27 @@ defmodule Ladder.Behaviours.BinanceWebsocket do
   defmacro __using__(_) do
     quote do
       use WebSockex
+      alias Ladder.Helper.ProcessRegistry
+      alias Ladder.Services.Binanace.Helper
 
-      def start_link({endpoint, stream_name}) do
-        WebSockex.start_link(
-          endpoint<>stream_name,
-          __MODULE__,
-          %{endpoint: endpoint, stream_name: stream_name},
-          name: process_name(stream_name)
-        )
+      def start_link({endpoint, stream}) do
+        endpoint<>stream
+        |> WebSockex.start_link(
+             __MODULE__,
+             create_state({endpoint, stream}),
+             name: via_tuple(Helper.symbol(stream)))
       end
 
       def handle_frame({:text, msg}, state) do
         msg
         |> Poison.decode!()
-#        |> IO.inspect
-        |> handle_decoded_msg(state[:stream_name])
+        |> IO.inspect
+        |> handle_decoded_msg(state.symbol)
         {:ok, state}
       end
 
-      defp process_name(stream_name) do
-        String.to_atom("#{__MODULE__}#{stream_name}")
+      defp via_tuple(symbol) do
+        ProcessRegistry.via_tuple({__MODULE__, symbol})
       end
     end
   end
