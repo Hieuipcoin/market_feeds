@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="dc7fd585-8339-496b-8c19-1eee9dd7bf38" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/ladder/behaviours/binance_websocket.ex" afterPath="$PROJECT_DIR$/lib/ladder/behaviours/binance_websocket.ex" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/ladder/database/database.ex" afterPath="$PROJECT_DIR$/lib/ladder/database/database.ex" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/ladder/services/binance/connection_worker.ex" afterPath="$PROJECT_DIR$/lib/ladder/services/binance/connection_worker.ex" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/ladder/services/binance/helper.ex" afterPath="$PROJECT_DIR$/lib/ladder/services/binance/helper.ex" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/ladder/services/binance/parser_worker.ex" afterPath="$PROJECT_DIR$/lib/ladder/services/binance/parser_worker.ex" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -47,21 +44,31 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="parser_worker.ex" pinned="false" current-in-tab="true">
+      <file leaf-file-name="parser_worker.ex" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/ladder/services/binance/parser_worker.ex">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="574">
-              <caret line="41" column="21" lean-forward="true" selection-start-line="41" selection-start-column="21" selection-end-line="41" selection-end-column="21" />
+            <state relative-caret-position="112">
+              <caret line="8" column="0" lean-forward="true" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="helper.ex" pinned="false" current-in-tab="false">
+      <file leaf-file-name="parser_server.ex" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/ladder/behaviours/parser_server.ex">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="440">
+              <caret line="42" column="0" lean-forward="true" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="helper.ex" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/lib/ladder/services/binance/helper.ex">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="252">
-              <caret line="18" column="0" lean-forward="true" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+            <state relative-caret-position="28">
+              <caret line="2" column="46" lean-forward="false" selection-start-line="2" selection-start-column="46" selection-end-line="2" selection-end-column="46" />
               <folding />
             </state>
           </provider>
@@ -80,8 +87,8 @@
       <file leaf-file-name="binance_websocket.ex" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/ladder/behaviours/binance_websocket.ex">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="17" column="27" lean-forward="true" selection-start-line="17" selection-start-column="27" selection-end-line="17" selection-end-column="27" />
+            <state relative-caret-position="406">
+              <caret line="29" column="0" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -135,12 +142,13 @@
         <option value="$PROJECT_DIR$/lib/ladder/services/binance/binance.ex" />
         <option value="$PROJECT_DIR$/lib/ladder/system.ex" />
         <option value="$PROJECT_DIR$/mix.exs" />
-        <option value="$PROJECT_DIR$/lib/ladder/services/binance/helper.ex" />
         <option value="$PROJECT_DIR$/lib/ladder/helper/process_registry.ex" />
-        <option value="$PROJECT_DIR$/lib/ladder/services/binance/parser_worker.ex" />
         <option value="$PROJECT_DIR$/lib/ladder/behaviours/binance_websocket.ex" />
         <option value="$PROJECT_DIR$/lib/ladder/database/database.ex" />
         <option value="$PROJECT_DIR$/lib/ladder/services/binance/connection_worker.ex" />
+        <option value="$PROJECT_DIR$/lib/ladder/services/binance/parser_worker.ex" />
+        <option value="$PROJECT_DIR$/lib/ladder/behaviours/parser_server.ex" />
+        <option value="$PROJECT_DIR$/lib/ladder/services/binance/helper.ex" />
       </list>
     </option>
   </component>
@@ -275,12 +283,12 @@
       <updated>1551323343487</updated>
       <workItem from="1551323344679" duration="15855000" />
       <workItem from="1551428155494" duration="44206000" />
-      <workItem from="1551753289885" duration="12857000" />
+      <workItem from="1551753289885" duration="14053000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="72918000" />
+    <option name="totallyTimeSpent" value="74114000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1405" height="877" extended-state="6" />
@@ -580,22 +588,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/ladder/services/binance/helper.ex">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="18" column="0" lean-forward="true" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/ladder/behaviours/binance_websocket.ex">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="17" column="27" lean-forward="true" selection-start-line="17" selection-start-column="27" selection-end-line="17" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/ladder/services/binance/connection_worker.ex">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="294">
@@ -604,10 +596,34 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/lib/ladder/behaviours/binance_websocket.ex">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="406">
+          <caret line="29" column="0" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/ladder/behaviours/parser_server.ex">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="440">
+          <caret line="42" column="0" lean-forward="true" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/lib/ladder/services/binance/parser_worker.ex">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="574">
-          <caret line="41" column="21" lean-forward="true" selection-start-line="41" selection-start-column="21" selection-end-line="41" selection-end-column="21" />
+        <state relative-caret-position="112">
+          <caret line="8" column="0" lean-forward="true" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/ladder/services/binance/helper.ex">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="28">
+          <caret line="2" column="46" lean-forward="false" selection-start-line="2" selection-start-column="46" selection-end-line="2" selection-end-column="46" />
           <folding />
         </state>
       </provider>
