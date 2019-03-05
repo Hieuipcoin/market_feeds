@@ -10,13 +10,21 @@ defmodule Ladder.Services.Binanace.Binance do
 
   def init(:ok) do
     IO.puts("riki in init Binance supervisor")
-    children = Enum.map(@streams, &worker_spec/1)
-    Supervisor.init(children, strategy: :one_for_one)
+    connection_children = Enum.map(@streams, &con_worker_spec/1)
+    parser_children = Enum.map(@streams, &par_worker_spec/1)
+
+    parser_children ++ connection_children
+    |> Supervisor.init(strategy: :one_for_one)
   end
 
-  defp worker_spec(stream) do
-    default_worker_spec = {Ladder.Services.Binanace.Worker, {@endpoint, stream}}
-    Supervisor.child_spec(default_worker_spec, id: stream)
+  defp con_worker_spec(stream) do
+    default_worker_spec = {Ladder.Services.Binanace.ConnectionWorker, {@endpoint, stream}}
+    Supervisor.child_spec(default_worker_spec, id: stream<>"con")
+  end
+
+  defp par_worker_spec(stream) do
+    default_worker_spec = {Ladder.Services.Binanace.ParserWorker, {@endpoint, stream}}
+    Supervisor.child_spec(default_worker_spec, id: stream<>"par")
   end
 
 #  def handle_info({:EXIT, pid, reason}, state) do

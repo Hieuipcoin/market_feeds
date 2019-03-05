@@ -7,6 +7,7 @@ defmodule Ladder.System do
 
   def init(:ok) do
     children = [
+      Ladder.Helper.ProcessRegistry,
       Ladder.Database.Database,
       Ladder.Services.Manager
     ]
