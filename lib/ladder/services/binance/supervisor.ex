@@ -1,4 +1,4 @@
-defmodule Ladder.Services.Binanace.Binance do
+defmodule Ladder.Services.Binanace.Supervisor do
   use Supervisor
   alias Ladder.Services.Binanace.ConnectionWorker
   alias Ladder.Services.Binanace.ParserWorker

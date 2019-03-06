@@ -1,4 +1,4 @@
-defmodule Ladder.Services.Bitfinex.Bitfinex do
+defmodule Ladder.Services.Bitfinex.Supervisor do
   use Supervisor
 
   def start_link(_) do

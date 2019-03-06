@@ -7,8 +7,8 @@ defmodule Ladder.Services.Manager do
 
   def init(:ok) do
     children = [
-      Ladder.Services.Binanace.Binance,
-      Ladder.Services.Bitfinex.Bitfinex
+      Ladder.Services.Binanace.Supervisor,
+      Ladder.Services.Bitfinex.Supervisor
     ]
 
     Supervisor.init(children, strategy: :one_for_one)
