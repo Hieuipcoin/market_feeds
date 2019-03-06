@@ -13,17 +13,14 @@ defmodule Ladder.Behaviours.BinanceWebsocket do
              name: via_tuple(Helper.symbol(stream)))
       end
 
-      def handle_frame({:text, msg}, state) do
-        msg
-        |> Poison.decode!()
-        |> IO.inspect
-        |> handle_decoded_msg(state.symbol)
-        {:ok, state}
-      end
-
       defp via_tuple(symbol) do
         ProcessRegistry.via_tuple({__MODULE__, symbol})
       end
     end
   end
+end
+
+defmodule Ladder.Services.Binanace.ConnectionState do
+  defstruct [:exchange, :symbol]
+  use ExConstructor
 end
