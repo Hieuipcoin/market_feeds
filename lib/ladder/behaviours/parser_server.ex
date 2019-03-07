@@ -26,32 +26,22 @@ defmodule Ladder.Behaviours.ParserServer do
         GenServer.cast(via_tuple(symbol), {:send, data})
       end
 
-      defp create_state({endpoint, stream}) do
-        ParserState.new(%{
-          exchange: Helper.exchange(endpoint),
-          symbol: Helper.symbol(stream)
-        })
+      @impl GenServer
+      def handle_cast({:send, data}, state) do
+        IO.puts("handle_cast")
+
+        case parse(data, state) do
+          {:ok, parsed_data, new_state} ->
+            Database.save(parsed_data, new_state)
+            {:noreply, new_state}
+          _ -> {:noreply, state}
+        end
+
       end
 
       defp via_tuple(symbol) do
         ProcessRegistry.via_tuple({__MODULE__, symbol})
       end
-
-      @impl GenServer
-      def handle_cast({:send, data}, state) do
-        IO.puts("handle_cast")
-
-        parse(data)
-        |> Database.save(state)
-
-        {:noreply, state}
-      end
     end
   end
-end
-
-
-defmodule Ladder.Services.Binanace.ParserState do
-  defstruct [:exchange, :symbol]
-  use ExConstructor
 end

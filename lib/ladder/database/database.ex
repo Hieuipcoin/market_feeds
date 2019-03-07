@@ -4,16 +4,17 @@ defmodule Ladder.Database.Database do
 
   def save(value, state) do
     create(value, state)
-    |> IO.inspect
     |> write
-    |> IO.inspect
   end
 
-  defp create(value, state) do
-    IO.inspect(state)
+  defp create(%{bids: bids, market_bid: market_bid, asks: asks, market_ask: market_ask}, state) do
     data = %LadderSeries{}
     data = %{data | tags: %{data.tags | exchange: state.exchange, symbol: state.symbol}}
-    %{data | fields: %{data.fields | value: value}}
+    %{data | fields: %{data.fields |
+      bids: Poison.encode!(bids),
+      market_bid: Poison.encode!(market_bid),
+      asks: Poison.encode!(asks),
+      market_ask: Poison.encode!(market_ask)}}
   end
 end
 

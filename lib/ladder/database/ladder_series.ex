@@ -8,6 +8,9 @@ defmodule Ladder.Database.LadderSeries do
     tag :exchange
     tag :symbol
 
-    field :value
+    field :bids
+    field :market_bid
+    field :asks
+    field :market_ask
   end
 end

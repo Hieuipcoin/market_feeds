@@ -6,11 +6,11 @@ defmodule Ladder.Services.Binanace.ConnectionWorker do
   def handle_frame({:text, msg}, state) do
     msg
     |> Poison.decode!()
-    |> IO.inspect
     |> handle_decoded_msg(state.symbol)
     {:ok, state}
   end
 
+  # for handle the others
   def handle_frame({type, msg}, state) do
     IO.puts "Received Message - Type: #{inspect type} -- Message: #{inspect msg}"
     {:ok, state}
