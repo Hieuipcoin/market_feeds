@@ -1,4 +1,5 @@
 defmodule Ladder.Services.Binanace.Supervisor do
+  require Logger
   use Supervisor
   alias Ladder.Services.Binanace.ConnectionWorker
   alias Ladder.Services.Binanace.ParserWorker
@@ -12,7 +13,8 @@ defmodule Ladder.Services.Binanace.Supervisor do
   end
 
   def init(:ok) do
-    IO.puts("riki in init Binance supervisor #{inspect @streams}")
+    Logger.info("[#{__MODULE__}][init] endpoints=#{inspect @endpoint}, streams=#{inspect @streams}")
+
     connection_children = Enum.map(@streams, &con_worker_spec/1)
     parser_children = Enum.map(@streams, &par_worker_spec/1)
 
@@ -21,24 +23,22 @@ defmodule Ladder.Services.Binanace.Supervisor do
   end
 
   defp con_worker_spec(stream) do
-    default_worker_spec = {ConnectionWorker, {@endpoint, stream}}
-    Supervisor.child_spec(default_worker_spec, id: stream<>"con")
+    worker_spec = {ConnectionWorker, {@endpoint, stream}}
+    Supervisor.child_spec(worker_spec, id: stream<>"con")
   end
 
   defp par_worker_spec(stream) do
-    IO.puts("riki in par_worker_spec #{inspect stream}")
-
-    default_worker_spec = {ParserWorker, {@endpoint, stream}}
-    Supervisor.child_spec(default_worker_spec, id: stream<>"par")
+    worker_spec = {ParserWorker, {@endpoint, stream}}
+    Supervisor.child_spec(worker_spec, id: stream<>"par")
   end
 
-#  def handle_info({:EXIT, pid, reason}, state) do
-#    IO.puts("A child process died: #{reason}")
-#    {:noreply, state}
-#  end
-#
-#  def handle_info(msg, state) do
-#    IO.puts("Supervisor received unexpected message: #{inspect(msg)}")
-#    {:noreply, state}
-#  end
+  def handle_info({:EXIT, pid, reason}, state) do
+    Logger.error("[#{__MODULE__}][handle_info][:EXIT] pid=#{inspect pid}, reason=#{inspect reason}, state=#{inspect state}")
+    {:noreply, state}
+  end
+
+  def handle_info(msg, state) do
+    Logger.error("[#{__MODULE__}][handle_info][:Others] msg=#{inspect msg}, state=#{inspect state}")
+    {:noreply, state}
+  end
 end

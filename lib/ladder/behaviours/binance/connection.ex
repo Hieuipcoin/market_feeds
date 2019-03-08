@@ -29,12 +29,12 @@ defmodule Ladder.Behaviours.Binance.Connection do
       end
 
       def handle_ping(:ping, state) do
-        Logger.info("[#{__MODULE__}][handle_ping] #{inspect :ping}, state=#{inspect state}")
+        Logger.error("[#{__MODULE__}][handle_ping] #{inspect :ping}, state=#{inspect state}")
         {:reply, :pong, state}
       end
 
       def handle_ping({:ping, msg}, state) do
-        Logger.info("[#{__MODULE__}][handle_ping] #{inspect :ping} msg=#{inspect msg}, state=#{inspect state}")
+        Logger.error("[#{__MODULE__}][handle_ping] #{inspect :ping} msg=#{inspect msg}, state=#{inspect state}")
         {:reply, {:pong, msg}, state}
       end
 
