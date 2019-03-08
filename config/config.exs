@@ -32,6 +32,19 @@ config :market_feeds, Ladder.Database.Database,
 #       json_decoder: Poison,
 #       auth: [method: :basic, username: "riki", password: "riki"]
 
+config :logger,
+       backends: [
+         {LoggerBackend, :error},
+         {LoggerBackend, :info}]
+
+config :logger, :error,
+       path: "#{File.cwd!}/market_feeds_error.log",
+       level: :error
+
+config :logger, :info,
+       path: "#{File.cwd!}/market_feeds_info.log",
+       level: :info
+
 
 
 # It is also possible to import configuration files, relative to this

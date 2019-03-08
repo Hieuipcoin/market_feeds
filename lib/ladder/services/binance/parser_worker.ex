@@ -1,30 +1,29 @@
 defmodule Ladder.Services.Binanace.ParserWorker do
-  use Ladder.Behaviours.ParserServer
+  use Ladder.Behaviours.Binance.Parser
+  alias Ladder.Services.Binanace.Helper
 
   defp create_state({endpoint, stream}) do
     ParserState.new(%{
-      exchange: Helper.exchange(endpoint),
-      symbol: Helper.symbol(stream),
+      exchange: get_exchange(endpoint),
+      symbol: get_symbol(stream),
       update_id: -1
     })
   end
 
-  defp parse(%{"lastUpdateId" => update_id, "bids" => bids, "asks" => asks}, state) do
-
+  defp parse(ladder = %{"lastUpdateId" => update_id, "bids" => bids, "asks" => asks}, state) do
     if is_valid({:input, {update_id, bids, asks}}, state) do
       new_state = %{state | update_id: update_id}
       {:ok, build_data(bids, asks), new_state}
     else
+      Logger.error("[#{__MODULE__}][parse] ladder=#{inspect ladder}, state=#{inspect state}")
       {:error, nil, state}
     end
   end
 
-  defp parse(data, state) do
-    IO.puts("wrong partial Book Depth Streams format!")
-    IO.inspect(data)
+  defp parse(ladder, state) do
+    Logger.error("[#{__MODULE__}][parse] wrong format. ladder=#{inspect ladder}, state=#{inspect state}")
     {:error, nil, state}
   end
-
 
   # return {:ok, parsed_data, new_state}
   # parsed_data = %{bids: bids, asks: asks, market_bid: market_bid, market_ask}
@@ -71,6 +70,16 @@ defmodule Ladder.Services.Binanace.ParserWorker do
 
   defp is_valid({:list, data}) do
     is_list(data) && length(data) > 0
+  end
+
+  # stream "/ws/btcusdt@depth10"
+  def get_symbol(stream) do
+    Helper.symbol(stream)
+  end
+
+  # endpoint = "wss://stream.binance.com:9443"
+  def get_exchange(endpoint) do
+    Helper.exchange(endpoint)
   end
 end
 

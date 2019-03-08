@@ -1,5 +1,4 @@
 defmodule Ladder.Services.Binanace.Helper do
-  alias Ladder.Helper.ProcessRegistry
 
   # endpoint = "wss://stream.binance.com:9443"
   def exchange(endpoint) do

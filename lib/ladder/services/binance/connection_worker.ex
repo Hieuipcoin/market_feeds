@@ -1,7 +1,9 @@
 defmodule Ladder.Services.Binanace.ConnectionWorker do
-  use Ladder.Behaviours.BinanceWebsocket
+  require Logger
+  use Ladder.Behaviours.Binance.Connection
   alias Ladder.Services.Binanace.ParserWorker
   alias Ladder.Services.Binanace.ConnectionState
+  alias Ladder.Services.Binanace.Helper
 
   def handle_frame({:text, msg}, state) do
     msg
@@ -12,8 +14,18 @@ defmodule Ladder.Services.Binanace.ConnectionWorker do
 
   # for handle the others
   def handle_frame({type, msg}, state) do
-    IO.puts "Received Message - Type: #{inspect type} -- Message: #{inspect msg}"
+    Logger.error("[#{__MODULE__}][handle_frame] type=#{inspect type}, msg=#{inspect msg}, state=#{inspect state}")
     {:ok, state}
+  end
+
+  # stream "/ws/btcusdt@depth10"
+  def get_symbol(stream) do
+    Helper.symbol(stream)
+  end
+
+  # endpoint = "wss://stream.binance.com:9443"
+  def get_exchange(endpoint) do
+    Helper.exchange(endpoint)
   end
 
   defp handle_decoded_msg(msg, symbol) do
@@ -22,13 +34,8 @@ defmodule Ladder.Services.Binanace.ConnectionWorker do
 
   defp create_state({endpoint, stream}) do
     ConnectionState.new(%{
-      exchange: Helper.exchange(endpoint),
-      symbol: Helper.symbol(stream)
+      exchange: get_exchange(endpoint),
+      symbol: get_symbol(stream)
     })
-  end
-
-  def terminate(reason, state) do
-    IO.puts("\nSocket Terminating:\n#{inspect reason}\n\n#{inspect state}\n")
-    exit(:normal)
   end
 end
