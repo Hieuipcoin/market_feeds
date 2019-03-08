@@ -9,7 +9,7 @@ defmodule Ladder.Behaviours.Binance.Parser do
 
       @impl true
       def init(state) do
-        IO.puts("init #{__MODULE__}")
+        Logger.info("[#{__MODULE__}][init] state=#{inspect state}")
         {:ok, state}
       end
 
