@@ -12,7 +12,7 @@ defmodule Ladder.System do
       Ladder.Database.Database,
       Ladder.Services.Manager
     ]
-    Logger.info("[#{__MODULE__}][init] children=#{inspect children}, strategy=:one_for_one")
+    Logger.error("[#{__MODULE__}][init] children=#{inspect children}, strategy=:one_for_one")
 
     Supervisor.init(children, strategy: :one_for_one)
   end

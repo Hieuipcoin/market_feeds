@@ -14,7 +14,7 @@ defmodule Ladder.Behaviours.Binance.Parser do
       end
 
       def start_link({endpoint, stream}) do
-        Logger.info("[#{__MODULE__}][start_link] endpoint=#{inspect endpoint}, stream=#{inspect stream}")
+        Logger.error("[#{__MODULE__}][start_link] endpoint=#{inspect endpoint}, stream=#{inspect stream}")
 
         {:ok, _pid} = GenServer.start_link(
           __MODULE__,

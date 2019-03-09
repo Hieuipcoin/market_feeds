@@ -13,7 +13,7 @@ defmodule Ladder.Services.Binanace.Supervisor do
   end
 
   def init(:ok) do
-    Logger.info("[#{__MODULE__}][init] endpoints=#{inspect @endpoint}, streams=#{inspect @streams}")
+    Logger.error("[#{__MODULE__}][init] endpoints=#{inspect @endpoint}, streams=#{inspect @streams}")
 
     connection_children = Enum.map(@streams, &con_worker_spec/1)
     parser_children = Enum.map(@streams, &par_worker_spec/1)
