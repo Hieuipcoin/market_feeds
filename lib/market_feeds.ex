@@ -1,16 +1,14 @@
 defmodule MarketFeeds do
   @moduledoc """
-  Documentation for MarketFeeds.
+  Collect latest streaming pricing data in the world of cryptocurrencies.
   """
 
   @doc """
-  Hello world.
-
-  ## Examples
-
-      iex> MarketFeeds.hello()
-      :world
-
+  require: influxdb
+  steps:
+  - mix deps.get
+  - mix deps.compile
+  - iex -S mix
   """
   use Application
 
